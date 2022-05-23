@@ -28,11 +28,19 @@
     <div class="row">
         <div class="col-md-12">
             <button type="button" class="btn btn-primary float-end " style="margin-top: 20px" data-bs-toggle="modal"
-                data-bs-target="#modalRegistro" ng-click = "adicionarItens()">Adicionar Itens
+                data-bs-target="#modalRegistro" >Adicionar Conteiner
 
             </button>
 
         </div>
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary float-end " style="margin-top: 20px" data-bs-toggle="modal"
+                data-bs-target="#modalMovimentacao" >Adicionar Movimentação
+
+            </button>
+        </div>
+       
+        
         <div class="row" style="margin-top: 20px">
             <div class="col-md-12">
                 <table id="dadosjs" class="table table-hover">
@@ -43,6 +51,7 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Status</th>
                             <th scope="col">Categoria</th>
+                            <th scope="col">Tipo de Movimentação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +61,7 @@
                             <td>20</td>
                             <td>Cheio</td>
                             <td>Exportação</td>
+                            <td>embarque</td>
                         </tr>
                         <tr>
 
@@ -65,8 +75,8 @@
 
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel"
+        <!-- Modal Conteiner -->
+        <div class="modal" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <!-- Modal-lg para a modal ficar maior -->
@@ -89,7 +99,7 @@
                                     <label for="">Numero do Conteiner </label>
 
                                     <input   id="txtNumerodoConteiner"type="text" class="form-control"
-                                        placeholder="digite o Numero do Conteiner..." ng-model="form.conteiner"></impute>
+                                        placeholder="digite o Numero do Conteiner..." ng-model="form.conteiner"></input>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +107,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Tipo</label>
-                                    <input id="txtTipo" type="Numero" class="form-control"
-                                        placeholder="digite o Cliente..." ng-model="form.numero" />
+                                    <input id="txtTipo" type="number" class="form-control"
+                                        placeholder="digite o Tipo (20 ou 40)..." ng-model="form.tipo" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -106,7 +116,7 @@
                                     <label for="">Status </label>
 
                                     <input id="txtStatus" type="text" class="form-control"
-                                        placeholder="digite o Status..." ng-model="form.status"></impute>
+                                        placeholder="digite o Status (Cheio ou Vazio)" ng-model="form.status"></input>
                                 </div>
                             </div>
                             <div class="row">
@@ -114,27 +124,124 @@
                                     <div class="form-group">
                                         <label for="">Categoria</label>
                                         <input id="txtCategoria" type="text" class="form-control"
-                                            placeholder="digite a Categoria..." ng-model="form.categoria"/>
+                                            placeholder="digite a Categoria (Importação ou Exportação)" ng-model="form.categoria"/>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-primary">Salvar</button>
+                                <button id="Salvarb" type="button" class="btn btn-primary" data-toggle="modal" >Salvar</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+
+            
+        
+        
+        </div>
+        <!-- Modal Movimentação -->
+        <div class="modal fade" id="modalMovimentacao" tabindex="-1" aria-labelledby="modalMovimentacaoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal-lg para a modal ficar maior -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMovimentacaoLabel">Movimentação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Tipo da Movimentação</label>
+                                <select [(ngModel)]= "tipoMov">
+                                    <option value="" disabled selected hidden>Escolha um Tipo</option>
+                                    <option value="0">Embarque</option>
+                                    <option value="1">Descarga</option>
+                                    <option value="2">Gate in</option>
+                                    <option value="3">Gate out</option>
+                                    <option value="4">Reposicionamento</option>
+                                    <option value="5">Pesagem</option>
+                                    <option value="6">Scanner</option>                                  
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              
+                            </div>
+                        </div><br>
+
+                        <br><div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Data Inicio </label>
+                        
+                                <input id="txtDatain" type="date" class="form-control" ng-model="dataInicial"
+                                bs-datepicker data-date-format="dd/MM/yyyy" placeholder="-Data inicial-"></input>
+                                <span class="add-on input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group  ">
+                                <label for="">Hora Inicio</label>
+                                <input id="txthoraInicial" type="time" class="form-control"
+                                    placeholder="Digite a hora inicial..." ng-model="horaInicio" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Data Final </label>
+                        
+                                <input id="txtDatafi" type="date" class="form-control" ng-model="dataFinal"
+                                bs-datepicker data-date-format="dd/MM/yyyy" placeholder="-Data Final-"></input>
+                                <span class="add-on input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group  ">
+                                    <label for="">Hora Final</label>
+                                    <input id="txthoraFinal" type="time" class="form-control"
+                                        placeholder="Digite a hora final..." ng-model="horaFinal"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary" ng-click = "adicionarMovimentacao()">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+         
+        </div>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
                 integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
                 crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
                 integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
                 crossorigin="anonymous"></script>
-            <script src="index.js"></script>
+            <script src="cadastro.js"></script>
 </body>
 
 </html>
+
