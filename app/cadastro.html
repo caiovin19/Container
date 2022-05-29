@@ -131,7 +131,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button id="Salvarb" type="button" class="btn btn-primary" data-toggle="modal" >Salvar</button>
+                                <button id="Salvarb" type="button" class="btn btn-primary" data-toggle="modal" ng-click="adicionarConteiner()">Salvar</button>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Tipo da Movimentação</label>
-                                <select [(ngModel)]= "tipoMov">
+                                <select [(ngModel)]= "form.tipoMov">
                                     <option value="" disabled selected hidden>Escolha um Tipo</option>
                                     <option value="0">Embarque</option>
                                     <option value="1">Descarga</option>
@@ -181,7 +181,7 @@
                             <div class="form-group">
                                 <label for="">Data Inicio </label>
                         
-                                <input id="txtDatain" type="date" class="form-control" ng-model="dataInicial"
+                                <input id="txtDatain" type="date" class="form-control" ng-model="form.dataInicial"
                                 bs-datepicker data-date-format="dd/MM/yyyy" placeholder="-Data inicial-"></input>
                                 <span class="add-on input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -195,7 +195,7 @@
                             <div class="form-group  ">
                                 <label for="">Hora Inicio</label>
                                 <input id="txthoraInicial" type="time" class="form-control"
-                                    placeholder="Digite a hora inicial..." ng-model="horaInicio" />
+                                    placeholder="Digite a hora inicial..." ng-model="form.horaInicio" />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -207,7 +207,7 @@
                             <div class="form-group">
                                 <label for="">Data Final </label>
                         
-                                <input id="txtDatafi" type="date" class="form-control" ng-model="dataFinal"
+                                <input id="txtDatafi" type="date" class="form-control" ng-model="form.dataFinal"
                                 bs-datepicker data-date-format="dd/MM/yyyy" placeholder="-Data Final-"></input>
                                 <span class="add-on input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -218,7 +218,7 @@
                                 <div class="form-group  ">
                                     <label for="">Hora Final</label>
                                     <input id="txthoraFinal" type="time" class="form-control"
-                                        placeholder="Digite a hora final..." ng-model="horaFinal"/>
+                                        placeholder="Digite a hora final..." ng-model="form.horaFinal"/>
                                 </div>
                             </div>
 

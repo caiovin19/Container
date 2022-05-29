@@ -1,15 +1,16 @@
 angular.module("myApp")
 .controller("conteiner", function($scope){
-$scope.form = {};
 
-
+var Sequelize=require("sequelize");
+var conteinerModel=require("../app/models/conteiner");
+var movimentacaoModal=require('../app/models/movimentacao');
 
 
 /*var dados = []
 function validaNumber(string){
     var numString = string.replace(/[^0-9]/g,'');
     return numString
-}
+}*/
 
 
 
@@ -40,7 +41,36 @@ $scope.adicionarConteiner = function() {
 
 
     }
-};*/
+    conteinerModel={ 
+        cliente:$scope.form.cliente,
+        numero_do_conteiner:$scope.form.conteiner,
+        tipo:$scope.form.tipo.tipo,
+        status:$scope.form.status,
+        categoria:$scope.form.categoria
+
+    }
+    var buildConteiner = conteinerModel.build(conteinerModel);
+    await buildConteiner.save()
+}
+$scope.adicionarMovimentacao = function() {
+    var dataInicio=$scope.form.dataInicial;
+    var dataFim=$scope.form.dataFinal;
+    
+    if(dataInicio>dataFim){
+        alert("Data Incorreta");
+    }
+ 
+
+movimentacaoModal={
+    tipo_de_movimentacao:$scope.form.tipoMov,
+    data_inicio:$scope.form.dataInicial,
+    hora_inicio:$scope.form.horaInicio,
+    data_fim:$scope.form.dataFinal,
+    hora_fim:$scope.form.horaFinal,
+}
+var buildMovimentacao = movimentacaoModal.build(movimentacaoModel);
+    await buildMovimentacao.save()
+}
 
 
 
@@ -75,35 +105,7 @@ $(function () {//passar os dados de string para array
     }
     $("#Salvarb").click(function(){//para puxar da tela
 
-        let cliente= $("#txtCliente").val();
-        let tipo= $("#txtNumerodoConteiner").val();
-        let tipoConteiner=$("#txtTipo").val();
-        let status=$("#txtStatus").val();
-        let categoria=$("#txtCategoria").val();
-
-        let registro={};
-        registro.cliente=cliente
-        registro.tipo=tipo
-        registro.tipoConteiner=tipoConteiner
-        registro.status=status
-        registro.categoria=categoria
-
-        registro.ID=dados.length+1
-        dados.push(registro);
-        swal("Registro Salvo", "lalal", "sucess");
-       
-        $(".modalRegistro").modal('hide');//para fechar a modal
-
-        $("#txtCliente").val("")//para limpar o modal
-        $("#txtNumerodoConteiner").val("")
-        $("#txtTipo").val("")
-        $("#txtStatus").val("")
-        $("#txtCategoria").val("")
-        tabelaT()
-
     })
 
-
-    
 })
 })
