@@ -3,11 +3,9 @@ const db=require('./db');
 
 var Conteiner=db.define('conteiners',{
      id_cliente:{
-         type:Sequelize.INTEGER,
-         field:'id_cliente',
-         primaryKey:true,
-         allowNull:false,
-         autoIcremente:true
+         type: Sequelize.INTEGER,
+         autoIncrement: true, primaryKey: true,
+         field: 'id_cliente'
      },
      cliente:{
          type:Sequelize.STRING, 
@@ -22,13 +20,13 @@ var Conteiner=db.define('conteiners',{
 
      },
      tipo:{
-         type:Sequelize.INTEGER, 
+         type:Sequelize.STRING, 
         field:'tipo', 
         allowNull:false
 
      },
      status:{
-         type:Sequelize.BOOLEAN, 
+         type:Sequelize.STRING, 
         field:'status', 
         allowNull:false
 
